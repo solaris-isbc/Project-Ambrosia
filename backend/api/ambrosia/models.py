@@ -1,25 +1,6 @@
 from django.db import models
 
 
-class Recipe(models.Model):
-
-    name = models.CharField(
-        max_length=250,
-        blank=False,
-        null=False
-    )
-
-    steps = models.TextField(
-        blank=False,
-        null=False
-    )
-
-    duration = models.IntegerField(
-        null=True
-    )
-
-    # TODO: categories, pictures, amount of people
-
 
 class Unit(models.Model):
 
@@ -43,6 +24,30 @@ class Ingredient(models.Model):
         blank=False,
         null=False
     )
+
+
+class Recipe(models.Model):
+    name = models.CharField(
+        max_length=250,
+        blank=False,
+        null=False
+    )
+
+    steps = models.TextField(
+        blank=False,
+        null=False
+    )
+
+    duration = models.IntegerField(
+        null=True
+    )
+
+    ingredients = models.ManyToManyField(
+        Ingredient,
+        through='RecipeIngredient'
+    )
+
+    # TODO: categories, pictures, amount of people
 
 
 class RecipeIngredient(models.Model):
