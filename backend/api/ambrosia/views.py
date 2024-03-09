@@ -1,3 +1,14 @@
-from django.shortcuts import render
+from rest_framework import  viewsets
 
-# Create your views here.
+from api.ambrosia.models import Recipe
+from api.ambrosia.serializers import RecipeSerializer
+
+
+class RecipeViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Recipes to be viewed or edited.
+    """
+    queryset = Recipe.objects.all()
+    serializer_class = RecipeSerializer
+
+
